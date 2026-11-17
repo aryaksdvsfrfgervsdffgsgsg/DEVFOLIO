@@ -1,0 +1,114 @@
+/* Colour + type system: three colours, two fonts */
+:root {
+  --paper: #F2F4F1;
+  --ink: #172224;
+  --brand: #0E5A55;
+  --line: rgba(23, 34, 36, 0.18);
+  --font-head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; margin: 0 0 0.75rem; }
+h1 { font-size: clamp(2rem, 6.5vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; max-width: 20ch; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 500; }
+p { margin: 0 0 1rem; max-width: 65ch; }
+
+a { color: var(--brand); text-underline-offset: 0.2em; }
+a:hover { color: var(--ink); }
+a:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; border-radius: 2px; }
+
+/* Header: Flexbox row, wraps on phones */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-list { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+.nav-list a {
+  display: block;
+  padding: 0.5rem 0.75rem; /* comfortable tap target */
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+}
+.nav-list a:hover { background: var(--brand); color: var(--paper); }
+
+/* Sections */
+main { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+main > section { padding: 2.5rem 0; }
+.hero { padding-top: 3.5rem; }
+.hero-sub { font-size: 1.15rem; color: var(--brand); font-weight: 600; margin-top: 1.25rem; }
+#about, #projects { border-top: 1px solid var(--line); }
+
+/* Projects: CSS Grid, 1 column on mobile */
+.project-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--brand);
+  border-radius: 4px;
+}
+.card p { flex: 1; }
+.card a { font-weight: 600; }
+
+/* Footer */
+#contact {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2.5rem 1.25rem;
+  margin-top: 2rem;
+}
+#contact a { color: var(--paper); }
+#contact a:hover { color: #fff; }
+#contact a:focus-visible { outline-color: var(--paper); }
+.contact-list { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; list-style: none; margin: 0 0 1.5rem; padding: 0; font-weight: 600; }
+.fine { font-size: 0.9rem; opacity: 0.75; margin: 0; }
+
+/* Breakpoints */
+@media (min-width: 700px) {
+  .site-header { padding: 1rem 2.5rem; }
+  main { padding: 0 2.5rem; }
+  #contact { padding: 3rem 2.5rem; }
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .project-grid { grid-template-columns: repeat(3, 1fr); }
+  main > section { padding: 3.5rem 0; }
+  .hero { padding-top: 5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
